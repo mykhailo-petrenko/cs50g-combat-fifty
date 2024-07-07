@@ -1,3 +1,10 @@
+--[[
+    CS50G Combat Fifty
+
+    Author: Mykhailo Petrenko
+    mikael.petrenko@gmail.com
+]]
+
 require 'dependencies'
 
 function love.load() 
@@ -16,15 +23,15 @@ function love.load()
 
   love.keyboard.keysPressed = {}
 
-  -- gStateStack = StateStack()
-  -- gStateStack:push(StartState())
+  gameStateStack = StateStack()
+  gameStateStack:push(StartState())
 end
 
 function love.resize(w, h)
   push:resize(w, h)
 end
 
-
+-- update pressed key table for current update loop
 function love.keypressed(key)
   if key == 'escape' then
       love.event.quit()
@@ -33,22 +40,26 @@ function love.keypressed(key)
   love.keyboard.keysPressed[key] = true
 end
 
+-- Key pressed getter
 function love.keyboard.wasPressed(key)
   return love.keyboard.keysPressed[key]
 end
 
 function love.update(dt)
   Timer.update(dt)
-  -- gStateStack:update(dt)
 
+  -- update all entities in State Stack
+  gameStateStack:update(dt)
+
+  -- reeset info about pressed keys (in prev update loop)
   love.keyboard.keysPressed = {}
 end
 
 function love.draw()
   push:start()
 
-  --draw here
-  -- gStateStack:render()
+  -- draw all entities in thee State Stack
+  gameStateStack:render()
 
   push:finish()
 end
