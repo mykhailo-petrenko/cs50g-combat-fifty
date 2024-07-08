@@ -5,7 +5,7 @@
     mikael.petrenko@gmail.com
 ]]
 
-require 'dependencies'
+require 'src/dependencies'
 
 function love.load() 
   love.window.setTitle('Combat Fifty')
@@ -23,8 +23,12 @@ function love.load()
 
   love.keyboard.keysPressed = {}
 
+  -- Set world meter size (in pixels)
+	love.physics.setMeter(TILE_SIZE)
+
   gameStateStack = StateStack()
-  gameStateStack:push(StartState())
+  -- gameStateStack:push(StartState())
+  gameStateStack:push(PlayState())
 end
 
 function love.resize(w, h)

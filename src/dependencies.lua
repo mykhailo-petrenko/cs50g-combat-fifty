@@ -1,7 +1,9 @@
-push = require 'lib/push'
-Timer = require 'lib/knife.timer'
-Class = require 'lib/class'
-Event = require 'lib/knife.event'
+push = require 'src/lib/push'
+Timer = require 'src/lib/knife.timer'
+Class = require 'src/lib/class'
+Event = require 'src/lib/knife.event'
+
+sti = require 'src/lib/sti'
 
 require 'src/states/BaseState'
 require 'src/states/StateStack'
@@ -10,4 +12,4 @@ require 'src/states/game/StartState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/PlayState'
 
-require 'constants'
+require 'src/constants'
