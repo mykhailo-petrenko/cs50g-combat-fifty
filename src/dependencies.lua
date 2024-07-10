@@ -2,8 +2,11 @@ push = require 'src/lib/push'
 Timer = require 'src/lib/knife.timer'
 Class = require 'src/lib/class'
 Event = require 'src/lib/knife.event'
+Bump = require 'src/lib/bump'
+STI = require 'src/lib/sti'
 
-sti = require 'src/lib/sti'
+require 'src/entity/Entity'
+require 'src/entity/Player'
 
 require 'src/states/BaseState'
 require 'src/states/StateStack'
