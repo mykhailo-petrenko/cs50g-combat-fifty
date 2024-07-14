@@ -13,7 +13,7 @@ function love.load()
   math.randomseed(os.time())
 
   local gameWidth, gameHeight = WINDOW_WIDTH, WINDOW_HEIGHT --fixed game resolution
-  local windowWidth, windowHeight =  WINDOW_WIDTH, WINDOW_HEIGHT
+  local windowWidth, windowHeight =  WINDOW_WIDTH*2, WINDOW_HEIGHT*2
   -- local windowWidth, windowHeight = love.window.getDesktopDimensions()
   push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {
     fullscreen = false,

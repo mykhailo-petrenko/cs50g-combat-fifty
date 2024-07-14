@@ -2,13 +2,14 @@
 Entity = Class{}
 
 function Entity:init(properties) 
+  self.id = properties.id or 'undefined'
   self.x = properties.x
   self.y = properties.y
-  self.w = properties.w
-  self.h = properties.h
-  self.speed = properties.speed
-  self.color = properties.color
+  self.width = properties.width or 0
+  self.height = properties.height or 0
+  self.speed = properties.speed or 0
 
+  self.isSensor = properties.isSensor or false
 end
 
 function Entity:update(dt) 
@@ -17,13 +18,8 @@ end
 
 
 function Entity:draw() 
-  if self.color=='red' then
-    love.graphics.setColor(1, 0, 0)
-  elseif self.color=='blue' then
-    love.graphics.setColor(0, 0, 1)
-  end
-
-  love.graphics.rectangle('line', self.x, self.y, self.w, self.h)
+  love.graphics.setColor(0, 1, 0)
+  love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
 
   love.graphics.setColor(1, 1, 1, 1)
 end

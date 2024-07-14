@@ -9,3 +9,5 @@ CS50G Final Assisgnment: Combat Fifty
 ## TODO:
  - hole, trap 
  - granates, mines
+ - configurable world/map size
+ 

@@ -14,26 +14,26 @@ function PlayState:enter()
   self.map:bump_init(self.world)
 
   self.player = Player({
+    id='uno',
     x = 30 * TILE_SIZE,
     y = 15 * TILE_SIZE,
-    w = TILE_SIZE * 0.9,
-    h = TILE_SIZE * 1.7,
-    speed = TILE_SIZE * 3,
-    color = 'red',
+    width = TILE_SIZE * 0.9,
+    height = TILE_SIZE * 1.7,
+    color = {1, 0, 0},
   })
   local player = self.player
-  self.world:add(player, player.x, player.y, player.w, player.h)
+  self.world:add(player, player.x, player.y, player.width, player.height)
 
   self.player_2 = Player({
+    id='dos',
     x = 10 * TILE_SIZE,
     y = 10 * TILE_SIZE,
-    w = TILE_SIZE * 0.9,
-    h = TILE_SIZE * 1.7,
-    speed = TILE_SIZE * 3,
-    color = 'blue',
+    width = TILE_SIZE * 0.9,
+    height = TILE_SIZE * 1.7,
+    color = {0, 0, 1},
   })
   local player = self.player_2
-  self.world:add(player, player.x, player.y, player.w, player.h)
+  self.world:add(player, player.x, player.y, player.width, player.height)
 end
 
 function PlayState:exit()
@@ -42,8 +42,9 @@ end
 
 function PlayState:update(dt)
   self.map:update(dt)
-  self:_updatePlayer(dt)
-  self:_updatePlayer_2(dt)
+
+  self:_updatePlayer(dt, self.player, {'a', 'w', 'd', 's', 'q', 'tab'})
+  self:_updatePlayer(dt, self.player_2, {'left', 'up', 'right', 'down', '.', ','})
 end
 
 function PlayState:render()
@@ -75,56 +76,49 @@ function PlayState:render()
 end
 
 
-function PlayState:_updatePlayer(dt)
-  local player = self.player
+-- keys {lefet, up, right, down, fire}
+function PlayState:_updatePlayer(dt, player, keys)
   local world = self.world
   local speed = player.speed
 
   local dx, dy = 0, 0
-  if love.keyboard.isDown('right') then
+  -- right
+  if love.keyboard.isDown(keys[3]) then
     dx = speed * dt
-  elseif love.keyboard.isDown('left') then
+  -- left
+  elseif love.keyboard.isDown(keys[1]) then
     dx = -speed * dt
   end
-  if love.keyboard.isDown('down') then
+
+  -- down
+  if love.keyboard.isDown(keys[4]) then
     dy = speed * dt
-  elseif love.keyboard.isDown('up') then
+  -- up
+  elseif love.keyboard.isDown(keys[2]) then
     dy = -speed * dt
   end
 
   if dx ~= 0 or dy ~= 0 then
     local cols
-    player.x, player.y, cols, cols_len = world:move(player, player.x + dx, player.y + dy)
+    player.x, player.y, cols, cols_len = world:move(player, player.x + dx, player.y + dy, player.filter)
     for i=1, cols_len do
       local col = cols[i]
       -- consolePrint(("col.other = %s, col.type = %s, col.normal = %d,%d"):format(col.other, col.type, col.normal.x, col.normal.y))
     end
   end
-end
 
-function PlayState:_updatePlayer_2(dt)
-  local player = self.player_2
-  local world = self.world
-  local speed = player.speed
+  player:update(dt)
 
-  local dx, dy = 0, 0
-  if love.keyboard.isDown('d') then
-    dx = speed * dt
-  elseif love.keyboard.isDown('a') then
-    dx = -speed * dt
+  -- Fire
+  if love.keyboard.wasPressed(keys[5]) then
+    fire = FireCommand(self.world)
+    fire:execute(player)
   end
-  if love.keyboard.isDown('s') then
-    dy = speed * dt
-  elseif love.keyboard.isDown('w') then
-    dy = -speed * dt
+  
+  -- Change Weapon
+  if love.keyboard.wasPressed(keys[6]) then
+    changeWeapon = ChangeWeaponCommand(self.world)
+    changeWeapon:execute(player)
   end
 
-  if dx ~= 0 or dy ~= 0 then
-    local cols
-    player.x, player.y, cols, cols_len = world:move(player, player.x + dx, player.y + dy)
-    for i=1, cols_len do
-      local col = cols[i]
-      -- consolePrint(("col.other = %s, col.type = %s, col.normal = %d,%d"):format(col.other, col.type, col.normal.x, col.normal.y))
-    end
-  end
 end

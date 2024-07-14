@@ -5,7 +5,12 @@ Event = require 'src/lib/knife.event'
 Bump = require 'src/lib/bump'
 STI = require 'src/lib/sti'
 
+require 'src/commands'
+
+require 'src/assets/Asset'
+
 require 'src/entity/Entity'
+require 'src/entity/Bullet'
 require 'src/entity/Player'
 
 require 'src/states/BaseState'
@@ -14,5 +19,7 @@ require 'src/states/StateStack'
 require 'src/states/game/StartState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/PlayState'
+
+-- require 'src/ControlCommands'
 
 require 'src/constants'
