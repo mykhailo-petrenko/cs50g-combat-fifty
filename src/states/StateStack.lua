@@ -20,9 +20,9 @@ function StateStack:processAI(params, dt)
     self.states[#self.states]:processAI(params, dt)
 end
 
-function StateStack:render()
+function StateStack:draw()
     for i, state in ipairs(self.states) do
-        state:render()
+        state:draw()
     end
 end
 

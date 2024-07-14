@@ -13,8 +13,7 @@ function Weapon:shoot(direction)
     y = self.y,
     direction = direction,
   })
-print(self.x)
-print(self.y)
+
   return bullet
 end
 

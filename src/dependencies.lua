@@ -5,7 +5,8 @@ Event = require 'src/lib/knife.event'
 Bump = require 'src/lib/bump'
 STI = require 'src/lib/sti'
 
-require 'src/commands'
+require 'src/Commands'
+require 'src/Scene'
 
 require 'src/assets/Asset'
 

@@ -24,3 +24,7 @@ function Bullet:draw()
 
   love.graphics.setColor(1, 1, 1, 1)
 end
+
+function Bullet:filter(other)
+  return 'cross'
+end

@@ -23,3 +23,7 @@ function Entity:draw()
 
   love.graphics.setColor(1, 1, 1, 1)
 end
+
+function Entity:filter(other)
+  return 'slide'
+end

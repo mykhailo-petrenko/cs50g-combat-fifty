@@ -1,7 +1,7 @@
 Command = Class{}
 
-function Command:init(world)
-  self.world = world
+function Command:init(scene)
+  self.scene = scene
 end
 
 function Command:execute(receiver)
@@ -18,7 +18,7 @@ function FireCommand:execute(player)
     local direction = {1, 0}
     local bullet = player.weapon:shoot(direction)
 
-    self.world:add(bullet, bullet.x, bullet.y, bullet.width, bullet.height)
+    self.scene:add(bullet)
   end
 end
 

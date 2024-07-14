@@ -18,7 +18,7 @@ function StartState:update(dt)
   end
 end
 
-function StartState:render()
+function StartState:draw()
   love.graphics.clear(0.1, 0.1, 0.1, 1)
 
   -- love.graphics.setFont(gFonts['medium'])

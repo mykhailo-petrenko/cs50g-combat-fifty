@@ -11,6 +11,7 @@ function PlayState:enter()
 	self.map = STI("tiled-map/combat-fifty-intro.lua", {"bump"})
 
   self.world = Bump.newWorld(TILE_SIZE)
+  self.scene = Scene(self.world)
   self.map:bump_init(self.world)
 
   self.player = Player({
@@ -42,13 +43,16 @@ end
 
 function PlayState:update(dt)
   self.map:update(dt)
+  self.scene:update(dt)
 
   self:_updatePlayer(dt, self.player, {'a', 'w', 'd', 's', 'q', 'tab'})
   self:_updatePlayer(dt, self.player_2, {'left', 'up', 'right', 'down', '.', ','})
 end
 
-function PlayState:render()
+function PlayState:draw()
   love.graphics.clear(0.1, 0.8, 0.1, 1)
+
+  self.scene:draw()
 
   -- love.graphics.setFont(gFonts['medium'])
   love.graphics.setColor(1, 0, 0, 1)
@@ -111,13 +115,13 @@ function PlayState:_updatePlayer(dt, player, keys)
 
   -- Fire
   if love.keyboard.wasPressed(keys[5]) then
-    fire = FireCommand(self.world)
+    fire = FireCommand(self.scene)
     fire:execute(player)
   end
   
   -- Change Weapon
   if love.keyboard.wasPressed(keys[6]) then
-    changeWeapon = ChangeWeaponCommand(self.world)
+    changeWeapon = ChangeWeaponCommand(self.scene)
     changeWeapon:execute(player)
   end
 
