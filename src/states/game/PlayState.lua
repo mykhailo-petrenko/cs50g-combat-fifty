@@ -16,8 +16,8 @@ function PlayState:enter()
 
   self.player = Player({
     id='uno',
-    x = 30 * TILE_SIZE,
-    y = 15 * TILE_SIZE,
+    x = 10 * TILE_SIZE,
+    y = 13 * TILE_SIZE,
     width = TILE_SIZE * 0.9,
     height = TILE_SIZE * 1.7,
     color = {1, 0, 0},
@@ -27,8 +27,8 @@ function PlayState:enter()
 
   self.player_2 = Player({
     id='dos',
-    x = 10 * TILE_SIZE,
-    y = 10 * TILE_SIZE,
+    x = 30 * TILE_SIZE,
+    y = 13 * TILE_SIZE,
     width = TILE_SIZE * 0.9,
     height = TILE_SIZE * 1.7,
     color = {0, 0, 1},

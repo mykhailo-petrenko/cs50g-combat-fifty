@@ -6,7 +6,7 @@ function Scene:init(world)
 end
 
 function Scene:update(dt)
-  print()
+  -- print()
   for i = #self.entities, 1, -1 do
     local entity = self.entities[i]
 
@@ -14,7 +14,7 @@ function Scene:update(dt)
     entity.x, entity.y, cols, cols_len = self.world:move(entity, entity.x, entity.y, entity.filter)
 
     for j = 1, cols_len, 1 do
-      print('collided with ' .. tostring(cols[j].other))
+      -- print('collided with ' .. tostring(cols[j].other))
     end
   end
 end
