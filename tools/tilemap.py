@@ -21,7 +21,7 @@ with Image.open(infile) as img:
     for x in range(0, cols):
       canvas.text(
         (x*cell_size, y*cell_size),
-        str(x + y*cell_size),
+        str(1 + x + y*cell_size),
         font_size=10
       )
 
