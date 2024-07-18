@@ -5,3 +5,18 @@ WINDOW_HEIGHT = TILE_SIZE * 24
 
 -- VIRTUAL_WIDTH = 384
 -- VIRTUAL_HEIGHT = 216
+
+globalTextures = {
+  ['characters'] = love.graphics.newImage('graphics/characters.png'),
+}
+
+globalQuads = {
+  ['characters'] = generateQuadsFrames(globalTextures.characters, 16, 16),
+}
+
+globalQuadProperties = {
+  ['characters'] = {
+    ['shift'] = 4,
+    ['length'] = 8,
+  }
+}

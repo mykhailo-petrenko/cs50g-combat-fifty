@@ -1,11 +1,18 @@
 Scene = Class{}
 
-function Scene:init(world)
-  self.world = world
+function Scene:init(map_config)
+  self.world = Bump.newWorld(TILE_SIZE)
+
+    -- Load a map exported to Lua from Tiled
+	self.map = STI(map_config, {"bump"})
+  self.map:bump_init(self.world)
+  
   self.entities = {}
 end
 
 function Scene:update(dt)
+  self.map:update(dt)
+  
   -- print()
   for i = #self.entities, 1, -1 do
     local entity = self.entities[i]

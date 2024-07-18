@@ -15,12 +15,19 @@ require 'src/entity/Bullet'
 require 'src/entity/Player'
 
 require 'src/states/BaseState'
+require 'src/states/StateMachine'
 require 'src/states/StateStack'
+
+require 'src/states/entity/EntityIdleState'
+require 'src/states/entity/EntityWalkState'
 
 require 'src/states/game/StartState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/PlayState'
 
--- require 'src/ControlCommands'
+require 'src/utils/debug'
+require 'src/utils/textures'
 
+require 'src/Animation'
 require 'src/constants'
+require 'src/entities_config'

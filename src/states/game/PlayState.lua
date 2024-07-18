@@ -7,34 +7,24 @@ end
 function PlayState:enter()
   print('play enter')
 
-  -- Load a map exported to Lua from Tiled
-	self.map = STI("tiled-map/combat-fifty-intro.lua", {"bump"})
+  self.scene = Scene("tiled-map/combat-fifty-intro.lua")
 
-  self.world = Bump.newWorld(TILE_SIZE)
-  self.scene = Scene(self.world)
-  self.map:bump_init(self.world)
-
-  self.player = Player({
+  local player1 = playerFactory({
     id='uno',
     x = 10 * TILE_SIZE,
     y = 13 * TILE_SIZE,
-    width = TILE_SIZE * 0.9,
-    height = TILE_SIZE * 1.7,
-    color = {1, 0, 0},
+    skinNumber = 1,
   })
-  local player = self.player
-  self.world:add(player, player.x, player.y, player.width, player.height)
+  self.scene.add(player1)
 
-  self.player_2 = Player({
+  local player2 = playerFactory({
     id='dos',
     x = 30 * TILE_SIZE,
-    y = 13 * TILE_SIZE,
-    width = TILE_SIZE * 0.9,
-    height = TILE_SIZE * 1.7,
-    color = {0, 0, 1},
+    y = 14 * TILE_SIZE,
+    skinNumber = 4,
   })
-  local player = self.player_2
-  self.world:add(player, player.x, player.y, player.width, player.height)
+  
+  self.scene.add(player2)
 end
 
 function PlayState:exit()
@@ -42,7 +32,6 @@ function PlayState:exit()
 end
 
 function PlayState:update(dt)
-  self.map:update(dt)
   self.scene:update(dt)
 
   self:_updatePlayer(dt, self.player, {'a', 'w', 'd', 's', 'q', 'tab'})

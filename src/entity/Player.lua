@@ -16,6 +16,9 @@ function Player:init(properties)
 end
 
 function Player:update(dt)
+  self.stateMachine:update(dt)
+  self:updateAnimation(dt)
+
   if self.weapon then
     self.weapon.x = self.x
     self.weapon.y = self.y
@@ -25,10 +28,13 @@ end
 
 
 function Player:draw() 
-  love.graphics.setColor(self.color[1], self.color[2], self.color[3])
-  love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
+  -- love.graphics.setColor(self.color[1], self.color[2], self.color[3])
+  -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
+  self.stateMachine:draw()
 
-  love.graphics.setColor(1, 1, 1, 1)
+  self:drawAnimation()
+
+  -- love.graphics.setColor(1, 1, 1, 1)
 end
 
 function Player:filter(other)
@@ -38,3 +44,37 @@ function Player:filter(other)
   return 'slide'
 end
 
+function playerFactory(properties)
+  local id = properties.id
+  local x = properties.x
+  local y = properties.y
+  local skinNumber = properties.skinNumber or 1
+
+  local player = Player({
+    id=id,
+    x = x,
+    y = y,
+    width = math.floor(TILE_SIZE * 0.97),
+    height = math.floor(TILE_SIZE * 1.7),
+    color = {1, 0, 0},
+  })
+
+  player.stateMachine = StateMachine({
+    ['walk'] = function() return PlayerWalkeState(player) end,
+    ['idle'] = function() return PlayerIdleState(player) end
+  })
+
+  local shift = (skinNumber - 1) * globalQuadProperties.characters.shift
+
+  local animations = Animation.animationsFactory(
+    ENTITY_DEFS.player.animations,
+    shift
+  )
+
+  player:setAnimations(animations)
+
+  -- player:changeState('walk')
+  player:changeState('idle')
+
+  return player;
+end

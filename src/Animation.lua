@@ -56,16 +56,24 @@ function Animation:getCurrentFrame()
     return self.frames[self.currentFrame]
 end
 
-function Animation.animationsFactory(animations)
+function Animation.animationsFactory(animations, frameShift)
     local animationsReturned = {}
+    local shift = frameShift or 0
 
     for k, animationDef in pairs(animations) do
-        animationsReturned[k] = Animation {
-            texture = animationDef.texture or 'entities',
-            frames = animationDef.frames,
+        local frames = {}
+        local N = #animationDef.frames
+
+        for i = 1, N do
+            frames[i] = animationDef.frames[i] + shift
+        end
+
+        animationsReturned[k] = Animation({
+            texture = animationDef.texture,
+            frames = frames,
             interval = animationDef.interval,
             looping = animationDef.looping
-        }
+        })
     end
 
     return animationsReturned
