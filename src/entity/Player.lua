@@ -54,7 +54,7 @@ function playerFactory(properties)
     id=id,
     x = x,
     y = y,
-    width = math.floor(TILE_SIZE * 0.97),
+    width = math.floor(TILE_SIZE),
     height = math.floor(TILE_SIZE * 1.7),
     color = {1, 0, 0},
   })
@@ -73,8 +73,8 @@ function playerFactory(properties)
 
   player:setAnimations(animations)
 
-  -- player:changeState('walk')
-  player:changeState('idle')
+  player:changeState('walk')
+  -- player:changeState('idle')
 
   return player;
 end

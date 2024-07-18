@@ -69,11 +69,19 @@ function Entity:drawAnimation()
   local sx = self.width / qw
   local sy = self.height / qh
 
+  local drawX = math.floor(self.x)
+  local drawY = math.floor(self.y)
+
+  if animation.mirrorX then
+    drawX = drawX + self.width
+    sx = -1 * sx
+  end
+
   love.graphics.draw(
     globalTextures[animation.texture],
     quad,
-    math.floor(self.x),
-    math.floor(self.y),
+    drawX,
+    drawY,
     0,
     sx,
     sy
@@ -83,9 +91,9 @@ end
 
 function Entity:directionVector()
   if self.direction == 'up' then
-    return {0, 1}
-  elseif self.direction == 'down' then
     return {0, -1}
+  elseif self.direction == 'down' then
+    return {0, 1}
   elseif self.direction == 'left' then
     return {-1, 0}
   elseif self.direction == 'right' then

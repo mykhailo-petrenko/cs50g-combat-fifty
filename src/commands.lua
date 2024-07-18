@@ -25,6 +25,16 @@ function WalkCommand:execute(scene)
     player.filter
   )
 
+  if self.dx > 0 then
+    player.direction = 'right'
+  elseif self.dx < 0 then
+    player.direction = 'left'
+  elseif self.dy > 0 then
+    player.direction = 'down'
+  elseif self.dy < 0 then
+    player.direction = 'up'
+  end
+  
   player.x = newX
   player.y = newy
 

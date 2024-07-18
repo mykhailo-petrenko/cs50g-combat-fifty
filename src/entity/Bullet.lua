@@ -9,6 +9,8 @@ function Bullet:init(properties)
   self.width = 8
   self.height = 8
   self.isSensor = true
+
+  self._r = math.sqrt(self.width*self.width/2)
 end
 
 
@@ -20,7 +22,12 @@ end
 
 function Bullet:draw() 
   love.graphics.setColor(1, 0, 0, 0.5)
-  love.graphics.circle('fill', self.x, self.y, self.width, self.height)
+  love.graphics.circle(
+    'fill', 
+    self.x + (self.width / 2), 
+    self.y + (self.height / 2), 
+    self._r
+  )
 
   love.graphics.setColor(1, 1, 1, 1)
 end

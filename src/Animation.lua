@@ -15,6 +15,7 @@ function Animation:init(def)
     self.interval = def.interval
     self.texture = def.texture
     self.looping = def.looping or true
+    self.mirrorX = def.mirrorX or false
 
     self.timer = 0
     self.currentFrame = 1
@@ -72,7 +73,8 @@ function Animation.animationsFactory(animations, frameShift)
             texture = animationDef.texture,
             frames = frames,
             interval = animationDef.interval,
-            looping = animationDef.looping
+            looping = animationDef.looping,
+            mirrorX = animationDef.mirrorX or false
         })
     end
 
