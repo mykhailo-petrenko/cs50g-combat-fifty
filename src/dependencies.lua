@@ -29,5 +29,6 @@ require 'src/utils/debug'
 require 'src/utils/textures'
 
 require 'src/Animation'
+require 'src/Puppeteer'
 require 'src/constants'
 require 'src/entities_config'

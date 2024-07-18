@@ -8,12 +8,28 @@ function Scene:init(map_config)
   self.map:bump_init(self.world)
   
   self.entities = {}
+  self.players = {}
+  self.puppeteers = {}
 end
 
 function Scene:update(dt)
   self.map:update(dt)
-  
-  -- print()
+
+  for i = #self.puppeteers, 1, -1 do
+    local puppeteer = self.puppeteers[i]
+    puppeteer:update(dt)
+  end
+
+  for i = #self.puppeteers, 1, -1 do
+    local puppeteer = self.puppeteers[i]
+    puppeteer:executeCommands(self)
+  end
+
+  for i = #self.players, 1, -1 do
+    local player = self.players[i]
+    player:update(dt)
+  end
+
   for i = #self.entities, 1, -1 do
     local entity = self.entities[i]
 
@@ -27,14 +43,38 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
+  -- Draw the map and all objects
+  self.map:draw()
+
   for i = #self.entities, 1, -1 do
     local entity = self.entities[i]
 
     entity:draw()
   end
+
+  for i = #self.players, 1, -1 do
+    local player = self.players[i]
+    player:draw()
+  end
+
+  -- deebug: draw bboxes (bump map)
+  love.graphics.setColor(0, 1, 0)
+  self.map:bump_draw()
 end
 
 function Scene:add(entity)
   self.world:add(entity, entity.x, entity.y, entity.width, entity.height)
   table.insert(self.entities, entity)
 end
+
+function Scene:addPlayer(player, properties)
+  local puppeteer = Puppeteer(player, {
+    controls = properties.controls
+  })
+
+  table.insert(self.puppeteers, puppeteer)
+
+  self.world:add(player, player.x, player.y, player.width, player.height)
+  table.insert(self.players, player)
+end
+

@@ -80,3 +80,15 @@ function Entity:drawAnimation()
   )
     
 end
+
+function Entity:directionVector()
+  if self.direction == 'up' then
+    return {0, 1}
+  elseif self.direction == 'down' then
+    return {0, -1}
+  elseif self.direction == 'left' then
+    return {-1, 0}
+  elseif self.direction == 'right' then
+    return {1, 0}
+  end
+end

@@ -5,6 +5,13 @@
     mikael.petrenko@gmail.com
 ]]
 
+-- if pcall(require, "lldebugger") then require("lldebugger").start() end
+-- if pcall(require, "mobdebug") then require("mobdebug").start() end
+
+if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
+  require("lldebugger").start()
+end
+
 require 'src/dependencies'
 
 function love.load() 

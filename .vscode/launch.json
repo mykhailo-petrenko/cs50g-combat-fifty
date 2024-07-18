@@ -5,6 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "lua-local",
+      "request": "launch",
+      "name": "Debug Love",
+      "program": {
+          "command": "love"
+      },
+      "args": [ "${workspaceFolder} "],
+      "cwd": "${workspaceFolder}",
+    },
+    {
       "type": "LuaHelper-Debug",
       "request": "launch",
       "name": "LuaHelper-Attach",

@@ -1,30 +1,57 @@
 Command = Class{}
 
-function Command:init(scene)
-  self.scene = scene
+function Command:init(entity)
+  self.entity = entity
 end
 
 function Command:execute(receiver)
-  print(receiver.id)
+  print_r(receiver)
 end
 
+WalkCommand = Class{__includes=Command}
+
+function WalkCommand:init(player, dx, dy)
+  self.entity = player
+  self.dx = dx
+  self.dy = dy
+end
+
+function WalkCommand:execute(scene)
+  local player = self.entity
+  local newX, newy, cols, cols_len = scene.world:move(
+    player,
+    player.x + self.dx,
+    player.y + self.dy,
+    player.filter
+  )
+
+  player.x = newX
+  player.y = newy
+
+  for i=1, cols_len do
+    local col = cols[i]
+    -- consolePrint(("col.other = %s, col.type = %s, col.normal = %d,%d"):format(col.other, col.type, col.normal.x, col.normal.y))
+  end
+end
 
 FireCommand = Class{__includes=Command}
 
-function FireCommand:execute(player)
-  print(player.id)
+function FireCommand:execute(scene)
+  local player = self.entity
+  print('fire', player.id)
   
   if player.weapon then
-    local direction = {1, 0}
+    local direction = player:directionVector()
     local bullet = player.weapon:shoot(direction)
 
-    self.scene:add(bullet)
+    scene:add(bullet)
   end
 end
 
 
 ChangeWeaponCommand = Class{__includes=Command}
 
-function ChangeWeaponCommand:execute(player)
-  print(player.id)
+function ChangeWeaponCommand:execute()
+  local player = self.entity
+  print('change weapon', player.id)
 end
