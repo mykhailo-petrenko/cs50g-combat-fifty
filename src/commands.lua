@@ -34,7 +34,7 @@ function WalkCommand:execute(scene)
   elseif self.dy < 0 then
     player.direction = 'up'
   end
-  
+
   player.x = newX
   player.y = newy
 
@@ -42,6 +42,8 @@ function WalkCommand:execute(scene)
     local col = cols[i]
     -- consolePrint(("col.other = %s, col.type = %s, col.normal = %d,%d"):format(col.other, col.type, col.normal.x, col.normal.y))
   end
+
+  player:moved()
 end
 
 FireCommand = Class{__includes=Command}

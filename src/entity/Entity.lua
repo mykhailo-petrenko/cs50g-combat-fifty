@@ -16,6 +16,8 @@ function Entity:init(properties)
   self.currentAnimation = nil
 
   self.stateMachine = nil
+
+  self.movedLastTime = 0
 end
 
 function Entity:update(dt)
@@ -99,4 +101,8 @@ function Entity:directionVector()
   elseif self.direction == 'right' then
     return {1, 0}
   end
+end
+
+function Entity:moved()
+  self.movedLastTime = love.timer.getTime()
 end

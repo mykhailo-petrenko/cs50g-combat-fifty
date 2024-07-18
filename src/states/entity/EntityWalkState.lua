@@ -16,6 +16,12 @@ function EntityWalkState:update(dt)
   if self.prevDirection ~= self.entity.direction then
     self.entity:changeState('walk')
   end
+
+  local diff = love.timer.getTime() - self.entity.movedLastTime
+
+  if diff > 0.1 then
+    self.entity:changeState('idle')
+  end
 end
 
 PlayerWalkeState = Class{__includes = EntityWalkState}

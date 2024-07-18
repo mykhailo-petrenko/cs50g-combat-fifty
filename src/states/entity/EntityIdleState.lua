@@ -14,11 +14,8 @@ end
 PlayerIdleState = Class{__includes = EntityIdleState}
 
 function PlayerIdleState:update(dt)
-  if love.keyboard.isDown('left') 
-    or love.keyboard.isDown('right')
-    or love.keyboard.isDown('up') 
-    or love.keyboard.isDown('down') 
-  then
-   self.entity:changeState('walk')
+  local diff = love.timer.getTime() - self.entity.movedLastTime
+  if diff < 0.1 then
+    self.entity:changeState('walk')
   end
 end
