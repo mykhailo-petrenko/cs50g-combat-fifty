@@ -53,7 +53,7 @@ function Player:filter(other)
   return 'slide'
 end
 
-function playerFactory(properties)
+function playerFactory(properties, scene)
   local id = properties.id
   local x = properties.x
   local y = properties.y
@@ -70,8 +70,8 @@ function playerFactory(properties)
   })
 
   player.stateMachine = StateMachine({
-    ['walk'] = function() return PlayerWalkState(player) end,
-    ['idle'] = function() return PlayerIdleState(player) end
+    ['walk'] = function() return PlayerWalkState(player, scene) end,
+    ['idle'] = function() return PlayerIdleState(player, scene) end
   })
 
   local shift = (skinNumber - 1) * globalQuadProperties.characters.shift

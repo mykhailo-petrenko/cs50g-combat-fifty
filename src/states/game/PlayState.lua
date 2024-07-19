@@ -15,7 +15,7 @@ function PlayState:enter()
     y = 13 * TILE_SIZE,
     skinNumber = 1,
     controls = {'a', 'w', 'd', 's', 'q', 'tab'}
-  })
+  }, self.scene)
 
   self.scene:addPlayer(player1)
 
@@ -25,7 +25,7 @@ function PlayState:enter()
     y = 14 * TILE_SIZE,
     skinNumber = 4,
     controls = {'left', 'up', 'right', 'down', '.', ','}
-  })
+  }, self.scene)
   
   self.scene:addPlayer(player2)
 end

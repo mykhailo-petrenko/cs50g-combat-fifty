@@ -9,26 +9,44 @@ function Scene:init(map_config)
   
   self.entities = {}
   self.players = {}
+  self.commands = {}
 end
 
 function Scene:update(dt)
   self.map:update(dt)
-  
+
   for i = #self.players, 1, -1 do
     local player = self.players[i]
     player:update(dt)
+
+    if player.isSensor then
+      local x, y, cols, cols_len = self.world:check(player, player.x, player.y, player.filter)
+      if cols_len ~= 0 then
+        player:onBump(cols, cols_len)
+      end
+    end
   end
 
   for i = #self.entities, 1, -1 do
     local entity = self.entities[i]
 
     entity:update(dt)
-    entity.x, entity.y, cols, cols_len = self.world:move(entity, entity.x, entity.y, entity.filter)
+    local x, y cols, cols_len = self.world:check(entity, entity.x, entity.y, entity.filter)
 
-    for j = 1, cols_len, 1 do
-      -- print('collided with ' .. tostring(cols[j].other))
+    if entity.isSensor then
+      local x, y, cols, cols_len = self.world:check(entity, entity.x, entity.y, entity.filter)
+      
+      if cols_len ~= 0 then
+        entity:onBump(cols, cols_len)
+      end
     end
   end
+
+  for i = 1, #self.commands, 1 do
+    self.commands[i]:execute(self)
+  end
+
+  self.commands = {}
 end
 
 function Scene:draw()
@@ -49,6 +67,10 @@ function Scene:draw()
   -- deebug: draw bboxes (bump map)
   love.graphics.setColor(0, 1, 0)
   self.map:bump_draw()
+end
+
+function Scene:enqueueCommand(command) 
+  table.insert(self.commands, command);
 end
 
 function Scene:add(entity)

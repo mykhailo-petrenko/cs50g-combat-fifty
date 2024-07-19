@@ -20,6 +20,8 @@ function Entity:init(properties)
   self.hp = 100
 
   self.movedLastTime = 0
+  self.targetX = nil
+  self.targetY = nil
 end
 
 function Entity:update(dt)
@@ -37,6 +39,10 @@ end
 
 function Entity:filter(other)
   return 'slide'
+end
+
+function Entity:onBump(collisions, collisions_number)
+  print(self.id, 'collisions', collisions_number)
 end
 
 function Entity:changeState(state)

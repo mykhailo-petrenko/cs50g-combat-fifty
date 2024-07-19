@@ -1,7 +1,8 @@
 EntityWalkState = Class{__includes = BaseState}
 
-function EntityWalkState:init(entity)
+function EntityWalkState:init(entity, scene)
   self.entity = entity
+  self.scene = scene
 
   self.entity:changeAnimation('walk-' .. self.entity.direction)
 

@@ -15,4 +15,10 @@ function PlayerIdleState:update(dt)
   then
     self.entity:changeState('walk')
   end
+
+  if love.keyboard.isDown(player.keys.FIRE) then
+    local move = FireCommand(player, dx, dy)
+    self.scene:enqueueCommand(move)  
+  end
+  
 end

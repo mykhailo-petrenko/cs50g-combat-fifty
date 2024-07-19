@@ -24,11 +24,9 @@ function PlayerWalkState:update(dt)
   end
 
   if dx ~= 0 or dy ~= 0 then
-    -- local move = WalkCommand(self.player, dx, dy)
-    -- table.insert(self.commands, move);
-    player.x = player.x + dx
-    player.y = player.y + dy
-    
+    local move = WalkCommand(player, dx, dy)
+    self.scene:enqueueCommand(move)
+
     self.entity:changeState('walk')
   else
     self.entity:changeState('idle')
