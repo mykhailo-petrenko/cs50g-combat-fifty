@@ -6,6 +6,13 @@ WINDOW_HEIGHT = TILE_SIZE * 24
 -- VIRTUAL_WIDTH = 384
 -- VIRTUAL_HEIGHT = 216
 
+DIRECTION = {
+  LEFT = 'left',
+  UP = 'up',
+  RIGHT = 'right',
+  DOWN = 'down',
+}
+
 globalTextures = {
   ['characters'] = love.graphics.newImage('graphics/characters.png'),
 }

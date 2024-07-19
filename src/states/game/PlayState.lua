@@ -14,28 +14,20 @@ function PlayState:enter()
     x = 10 * TILE_SIZE,
     y = 13 * TILE_SIZE,
     skinNumber = 1,
+    controls = {'a', 'w', 'd', 's', 'q', 'tab'}
   })
 
-  self.scene:addPlayer(
-    player1,
-    {
-      controls = {'a', 'w', 'd', 's', 'q', 'tab'}
-    }
-  )
+  self.scene:addPlayer(player1)
 
   local player2 = playerFactory({
     id='dos',
     x = 30 * TILE_SIZE,
     y = 14 * TILE_SIZE,
     skinNumber = 4,
+    controls = {'left', 'up', 'right', 'down', '.', ','}
   })
   
-  self.scene:addPlayer(
-    player2,
-    {
-      controls = {'left', 'up', 'right', 'down', '.', ','}
-    }
-  )
+  self.scene:addPlayer(player2)
 end
 
 function PlayState:exit()

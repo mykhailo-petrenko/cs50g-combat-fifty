@@ -9,22 +9,11 @@ function Scene:init(map_config)
   
   self.entities = {}
   self.players = {}
-  self.puppeteers = {}
 end
 
 function Scene:update(dt)
   self.map:update(dt)
-
-  for i = #self.puppeteers, 1, -1 do
-    local puppeteer = self.puppeteers[i]
-    puppeteer:update(dt)
-  end
-
-  for i = #self.puppeteers, 1, -1 do
-    local puppeteer = self.puppeteers[i]
-    puppeteer:executeCommands(self)
-  end
-
+  
   for i = #self.players, 1, -1 do
     local player = self.players[i]
     player:update(dt)
@@ -67,13 +56,7 @@ function Scene:add(entity)
   table.insert(self.entities, entity)
 end
 
-function Scene:addPlayer(player, properties)
-  local puppeteer = Puppeteer(player, {
-    controls = properties.controls
-  })
-
-  table.insert(self.puppeteers, puppeteer)
-
+function Scene:addPlayer(player)
   self.world:add(player, player.x, player.y, player.width, player.height)
   table.insert(self.players, player)
 end

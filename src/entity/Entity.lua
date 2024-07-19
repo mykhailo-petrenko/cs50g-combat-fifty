@@ -10,12 +10,14 @@ function Entity:init(properties)
   self.speed = properties.speed or 0
   self.isSensor = properties.isSensor or false
 
-  self.direction = 'down'
+  self.direction = DIRECTION.DOWN
 
   self.animations = nil
   self.currentAnimation = nil
 
   self.stateMachine = nil
+
+  self.hp = 100
 
   self.movedLastTime = 0
 end
@@ -88,19 +90,17 @@ function Entity:drawAnimation()
     sx,
     sy
   )
-    
 end
 
+local VECTOR_FROM_DIRECTION = {
+  [DIRECTION.LEFT] = {-1, 0},
+  [DIRECTION.UP] = {0, -1},
+  [DIRECTION.RIGHT] = {1, 0},
+  [DIRECTION.DOWN] = {0, 1},
+}
+
 function Entity:directionVector()
-  if self.direction == 'up' then
-    return {0, -1}
-  elseif self.direction == 'down' then
-    return {0, 1}
-  elseif self.direction == 'left' then
-    return {-1, 0}
-  elseif self.direction == 'right' then
-    return {1, 0}
-  end
+  return VECTOR_FROM_DIRECTION[self.direction] or {0, 0}
 end
 
 function Entity:moved()

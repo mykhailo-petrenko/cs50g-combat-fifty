@@ -13,6 +13,15 @@ function Player:init(properties)
     x = self.x,
     y = self.y
   })
+
+  self.keys = {
+    LEFT = properties.controls[1] or 'left',
+    UP = properties.controls[2] or 'up',
+    RIGHT = properties.controls[3] or 'right',
+    DOWN = properties.controls[4] or 'down',
+    FIRE = properties.controls[5] or '.',
+    NEXT_WEEAPON = properties.controls[6] or ',',
+  }
 end
 
 function Player:update(dt)
@@ -57,10 +66,11 @@ function playerFactory(properties)
     width = math.floor(TILE_SIZE),
     height = math.floor(TILE_SIZE * 1.7),
     color = {1, 0, 0},
+    controls = properties.controls
   })
 
   player.stateMachine = StateMachine({
-    ['walk'] = function() return PlayerWalkeState(player) end,
+    ['walk'] = function() return PlayerWalkState(player) end,
     ['idle'] = function() return PlayerIdleState(player) end
   })
 
@@ -72,9 +82,7 @@ function playerFactory(properties)
   )
 
   player:setAnimations(animations)
-
-  player:changeState('walk')
-  -- player:changeState('idle')
+  player:changeState('idle')
 
   return player;
 end
