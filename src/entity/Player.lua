@@ -30,8 +30,24 @@ function Player:update(dt)
   self:updateAnimation(dt)
 
   if self.weapon then
-    self.weapon.x = self.x
-    self.weapon.y = self.y
+    local wx = 0
+    local wy = 0
+    if self.direction == DIRECTION.LEFT then
+      wx = self.x
+      wy = self.y + (self.width / 2)
+    elseif self.direction == DIRECTION.UP then
+      wx = self.x + (self.width * 0.66)
+      wy = self.y
+    elseif self.direction == DIRECTION.RIGHT then 
+      wx = self.x + self.width
+      wy = self.y + (self.height / 2)
+    elseif self.direction == DIRECTION.DOWN then
+      wx = self.x + (self.width * 0.33)
+      wy = self.y + self.height
+    end
+    self.weapon.direction = self:directionVector()
+    self.weapon.x = wx
+    self.weapon.y = wy
     self.weapon:update(dt)
   end
 end

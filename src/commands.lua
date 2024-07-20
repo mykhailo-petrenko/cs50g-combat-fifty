@@ -41,9 +41,7 @@ function FireCommand:execute(scene)
   print('fire', player.id)
   
   if player.weapon then
-    local direction = player:directionVector()
-    
-    player.weapon:shoot(direction, scene)
+    player.weapon:shoot(scene)
   end
 end
 
