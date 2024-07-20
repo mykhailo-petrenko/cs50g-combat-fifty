@@ -4,6 +4,7 @@ Player = Class{__includes=Entity}
 function Player:init(properties)
   Entity.init(self, properties)
 
+  self.type = 'player'
   self.color = properties.color or {0, 1, 0}
 
   self.speed = 48
@@ -71,7 +72,9 @@ function playerFactory(properties, scene)
 
   player.stateMachine = StateMachine({
     ['walk'] = function() return PlayerWalkState(player, scene) end,
-    ['idle'] = function() return PlayerIdleState(player, scene) end
+    ['idle'] = function() return PlayerIdleState(player, scene) end,
+    ['fire'] = function() return PlayerFireState(player, scene) end,
+    ['reload'] = function() return PlayerReloadState(player, scene) end,
   })
 
   local shift = (skinNumber - 1) * globalQuadProperties.characters.shift

@@ -32,8 +32,6 @@ function WalkCommand:execute(scene)
     local col = cols[i]
     -- consolePrint(("col.other = %s, col.type = %s, col.normal = %d,%d"):format(col.other, col.type, col.normal.x, col.normal.y))
   end
-
-  player:moved()
 end
 
 FireCommand = Class{__includes=Command}
@@ -44,9 +42,8 @@ function FireCommand:execute(scene)
   
   if player.weapon then
     local direction = player:directionVector()
-    local bullet = player.weapon:shoot(direction)
-
-    scene:add(bullet)
+    
+    player.weapon:shoot(direction, scene)
   end
 end
 
@@ -56,4 +53,35 @@ ChangeWeaponCommand = Class{__includes=Command}
 function ChangeWeaponCommand:execute()
   local player = self.entity
   print('change weapon', player.id)
+end
+
+
+FlyCommand = Class{__includes=Command}
+function FlyCommand:init(entity, dx, dy)
+  self.entity = entity
+  self.dx = dx
+  self.dy = dy
+end
+
+function FlyCommand:execute(scene)
+  local entity = self.entity
+  local newX, newy, cols, cols_len = scene.world:move(
+    entity,
+    entity.x + self.dx,
+    entity.y + self.dy,
+    entity.filter
+  )
+
+  entity.x = newX
+  entity.y = newy
+
+  for i=1, cols_len do
+    local col = cols[i]
+    local target = col.other;
+
+    -- print(entity.type, entity.id, col.type, col.other.type, col.other.id)
+    if target.isSensor then
+      target:onBump(entity)
+    end
+  end
 end

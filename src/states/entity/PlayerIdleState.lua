@@ -4,7 +4,9 @@ PlayerIdleState = Class{__includes = EntityIdleState}
 function PlayerIdleState:update(dt)
   local player = self.entity
   
-  if 
+  if love.keyboard.isDown(player.keys.FIRE) then
+    self.entity:changeState('fire')
+  elseif
     love.keyboard.isDown(player.keys.RIGHT)
     or
     love.keyboard.isDown(player.keys.LEFT)
@@ -14,11 +16,6 @@ function PlayerIdleState:update(dt)
     love.keyboard.isDown(player.keys.UP) 
   then
     self.entity:changeState('walk')
-  end
-
-  if love.keyboard.isDown(player.keys.FIRE) then
-    local move = FireCommand(player, dx, dy)
-    self.scene:enqueueCommand(move)  
-  end
+  end  
   
 end

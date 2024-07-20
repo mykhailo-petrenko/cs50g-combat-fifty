@@ -1,8 +1,12 @@
 
 Entity = Class{}
 
+local entity_id = 1
+
 function Entity:init(properties) 
-  self.id = properties.id or 'undefined'
+  self.type = 'entity'
+  self.id = properties.id or ('entity' .. entity_id)
+  entity_id = entity_id + 1
   self.x = properties.x
   self.y = properties.y
   self.width = properties.width or 0
@@ -41,8 +45,9 @@ function Entity:filter(other)
   return 'slide'
 end
 
-function Entity:onBump(collisions, collisions_number)
-  print(self.id, 'collisions', collisions_number)
+function Entity:onBump(opposite)
+  print('onBump', self.type, self.id, opposite.type, opposite.id)
+  -- print_r(collisions);
 end
 
 function Entity:changeState(state)
@@ -107,8 +112,4 @@ local VECTOR_FROM_DIRECTION = {
 
 function Entity:directionVector()
   return VECTOR_FROM_DIRECTION[self.direction] or {0, 0}
-end
-
-function Entity:moved()
-  self.movedLastTime = love.timer.getTime()
 end

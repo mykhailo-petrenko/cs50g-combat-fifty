@@ -5,8 +5,11 @@ function PlayerWalkState:update(dt)
   local speed = player.speed
   local dx, dy = 0, 0
 
+  if love.keyboard.isDown(player.keys.FIRE) then
+    self.entity:changeState('fire')
+    return
   -- right
-  if love.keyboard.isDown(player.keys.RIGHT) then
+  elseif love.keyboard.isDown(player.keys.RIGHT) then
     dx = speed * dt
     player.direction = DIRECTION.RIGHT
   -- left

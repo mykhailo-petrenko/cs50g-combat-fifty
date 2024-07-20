@@ -2,12 +2,14 @@ Bullet = Class{__includes=Entity}
 
 function Bullet:init(properties)
   Entity.init(self, properties)
+  self.type = 'bullet'
 
   self.direection = properties.direction
 
-  self.speed = 64
+  self.speed = 128
   self.width = 8
   self.height = 8
+
   self.isSensor = true
 
   self._r = math.sqrt(self.width*self.width/2)
@@ -15,8 +17,7 @@ end
 
 
 function Bullet:update(dt)
-  self.x = self.x + (self.direection[1] * self.speed * dt)
-  self.y = self.y + (self.direection[2] * self.speed * dt)
+  Entity.update(self, dt)
 end
 
 

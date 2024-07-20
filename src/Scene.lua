@@ -18,28 +18,11 @@ function Scene:update(dt)
   for i = #self.players, 1, -1 do
     local player = self.players[i]
     player:update(dt)
-
-    if player.isSensor then
-      local x, y, cols, cols_len = self.world:check(player, player.x, player.y, player.filter)
-      if cols_len ~= 0 then
-        player:onBump(cols, cols_len)
-      end
-    end
   end
 
   for i = #self.entities, 1, -1 do
     local entity = self.entities[i]
-
     entity:update(dt)
-    local x, y cols, cols_len = self.world:check(entity, entity.x, entity.y, entity.filter)
-
-    if entity.isSensor then
-      local x, y, cols, cols_len = self.world:check(entity, entity.x, entity.y, entity.filter)
-      
-      if cols_len ~= 0 then
-        entity:onBump(cols, cols_len)
-      end
-    end
   end
 
   for i = 1, #self.commands, 1 do
@@ -76,6 +59,23 @@ end
 function Scene:add(entity)
   self.world:add(entity, entity.x, entity.y, entity.width, entity.height)
   table.insert(self.entities, entity)
+end
+
+function Scene:remove(entity)
+  self.world:remove(entity)
+
+  local index = -1
+
+  for i = 1, #self.entities, 1 do
+    if self.entities[i] == entity then
+      index = i
+      break
+    end
+  end
+
+  if index ~= -1 then
+    table.remove(self.entities, index)
+  end
 end
 
 function Scene:addPlayer(player)
