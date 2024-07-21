@@ -34,8 +34,8 @@ function love.load()
 	love.physics.setMeter(TILE_SIZE)
 
   gameStateStack = StateStack()
-  -- gameStateStack:push(StartState())
-  gameStateStack:push(PlayState())
+  gameStateStack:push(StartState())
+  -- gameStateStack:push(PlayState())
 end
 
 function love.resize(w, h)

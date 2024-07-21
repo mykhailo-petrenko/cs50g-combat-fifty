@@ -27,3 +27,15 @@ globalQuadProperties = {
     ['length'] = 8,
   }
 }
+
+globalFonts = {
+  ['small'] = love.graphics.newFont('fonts/ugly-byte-font/UglyByte.otf', 8),
+  ['medium'] = love.graphics.newFont('fonts/ugly-byte-font/UglyByte.otf', 16),
+  ['large'] = love.graphics.newFont('fonts/ugly-byte-font/UglyByte.otf', 32),
+  ['title'] = love.graphics.newFont('fonts/love-glitch-font/LoveGlitch.ttf', 64),
+  ['subtitle'] = love.graphics.newFont('fonts/love-glitch-font/LoveGlitch.ttf', 32)
+}
+
+-- globalSounds = {
+--   ['music'] = love.audio.newSource('sounds/music.mp3', 'static'),
+-- }
