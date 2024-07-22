@@ -33,6 +33,8 @@ require 'src/states/entity/PlayerIdleState'
 require 'src/states/entity/PlayerWalkState'
 require 'src/states/entity/PlayerFireState'
 require 'src/states/entity/PlayerReloadState'
+require 'src/states/entity/PlayerDeadState'
+require 'src/states/entity/PlayerRespawnState'
 
 require 'src/states/game/StartState'
 require 'src/states/game/FadeInState'

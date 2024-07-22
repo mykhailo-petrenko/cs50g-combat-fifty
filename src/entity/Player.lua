@@ -7,6 +7,8 @@ function Player:init(properties)
   self.type = 'player'
   self.color = properties.color or {0, 1, 0}
 
+  self.alive = true
+
   self.speed = 48
   self.isSensor = true
 
@@ -66,8 +68,20 @@ end
 function Player:filter(other)
   -- print(self.id);
   -- print(other);
+  if other and other.type == 'bullet' then
+    return 'cross'
+  end
 
   return 'slide'
+end
+
+function Player:onBump(opposite)
+  print('onBump', self.type, self.id, opposite.type, opposite.id)
+
+  if opposite.type == 'bullet' and self.alive then
+    self:changeState('dead')
+  end
+  -- print_r(collisions);
 end
 
 function playerFactory(properties, scene)
@@ -91,6 +105,8 @@ function playerFactory(properties, scene)
     ['idle'] = function() return PlayerIdleState(player, scene) end,
     ['fire'] = function() return PlayerFireState(player, scene) end,
     ['reload'] = function() return PlayerReloadState(player, scene) end,
+    ['dead'] = function() return PlayerDeadState(player, scene) end,
+    ['respawn'] = function() return PlayerRespawnState(player, scene) end,
   })
 
   local shift = (skinNumber - 1) * globalQuadProperties.characters.shift
