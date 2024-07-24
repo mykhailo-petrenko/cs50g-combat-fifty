@@ -4,7 +4,7 @@ function PlayerDeadState:init(entity, scene)
   self.entity = entity
   self.scene = scene
 
-  self.entity:changeAnimation('idle-' .. self.entity.direction)
+  self.entity:changeAnimation('death')
 end
 
 -- function PlayerReloadState:init() end
