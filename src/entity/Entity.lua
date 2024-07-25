@@ -55,7 +55,6 @@ function Entity:changeState(state)
 end
 
 function Entity:changeAnimation(name)
-  print('changeAnimation', name)
   self.currentAnimation = self.animations[name]
 end
 

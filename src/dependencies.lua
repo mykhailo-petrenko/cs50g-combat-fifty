@@ -11,8 +11,9 @@ require 'src/utils/textures'
 require 'src/constants'
 require 'src/entities_config'
 
-require 'src/Commands'
-require 'src/Scene'
+require 'src/core/Commands'
+require 'src/core/Scene'
+require 'src/core/LevelConfigurator'
 
 require 'src/assets/Asset'
 require 'src/assets/Weapon'
@@ -40,5 +41,5 @@ require 'src/states/game/StartState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/PlayState'
 
-require 'src/Animation'
+require 'src/core/Animation'
 

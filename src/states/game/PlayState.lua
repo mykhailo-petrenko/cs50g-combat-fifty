@@ -1,7 +1,9 @@
 PlayState = Class{__includes=BaseState}
 
-function PlayState:init()
+function PlayState:init(playersConfig)
   -- gSounds['intro-music']:play()
+  print_r(playersConfig)
+  self.playersConfig = playersConfig
 end
 
 function PlayState:enter()
@@ -13,7 +15,7 @@ function PlayState:enter()
     id='uno',
     x = 10 * TILE_SIZE,
     y = 13 * TILE_SIZE,
-    skinNumber = 1,
+    skinNumber = self.playersConfig[1].skinNumber or 1,
     controls = {'a', 'w', 'd', 's', 'q', 'tab'}
   }, self.scene)
 
@@ -23,7 +25,7 @@ function PlayState:enter()
     id='dos',
     x = 30 * TILE_SIZE,
     y = 14 * TILE_SIZE,
-    skinNumber = 4,
+    skinNumber = self.playersConfig[2].skinNumber or 4,
     controls = {'left', 'up', 'right', 'down', '.', ','}
   }, self.scene)
   
