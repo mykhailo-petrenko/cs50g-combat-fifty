@@ -25,7 +25,8 @@ function love.load()
   push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {
     fullscreen = false,
     vsync = true,
-    resizable = true
+    resizable = true,
+    highdpi = true,
   })
 
   love.keyboard.keysPressed = {}

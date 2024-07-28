@@ -16,12 +16,11 @@ function PlayerRespawnState:randomTeleport()
   local world = self.scene.world
 
   repeat
-    local x = math.random(TILE_SIZE, WINDOW_WIDTH)
-    local y = math.random(TILE_SIZE, WINDOW_HEIGHT)
+    local x = math.random(TILE_SIZE, WINDOW_WIDTH - TILE_SIZE - player.width)
+    local y = math.random(TILE_SIZE, WINDOW_HEIGHT - TILE_SIZE - player.height)
     local collisions, num
 
     self.newX, self.newY, collisions, num = world:check(player, x, y)
-    print(collisions)
   until num > 0
 
   local x = math.random(TILE_SIZE, WINDOW_WIDTH)

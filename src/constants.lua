@@ -14,11 +14,12 @@ DIRECTION = {
 }
 
 globalTextures = {
-  ['characters'] = love.graphics.newImage('graphics/characters.png'),
+  ['characters'] = love.graphics.newImage('graphics/rpg_32x32.png'),
+  -- ['characters'] = love.graphics.newImage('graphics/characters.png'),
 }
 
 globalQuads = {
-  ['characters'] = generateQuadsFrames(globalTextures.characters, 16, 16),
+  ['characters'] = generateQuadsFrames(globalTextures.characters, 32, 32),
 }
 
 globalQuadProperties = {

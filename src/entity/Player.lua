@@ -94,8 +94,8 @@ function playerFactory(properties, scene)
     id=id,
     x = x,
     y = y,
-    width = math.floor(TILE_SIZE),
-    height = math.floor(TILE_SIZE * 1.7),
+    width = ENTITY_DEFS.player.width,
+    height = ENTITY_DEFS.player.height,
     color = {1, 0, 0},
     controls = properties.controls
   })
@@ -117,7 +117,7 @@ function playerFactory(properties, scene)
   )
 
   player:setAnimations(animations)
-  player:changeState('idle')
+  player:changeState('respawn')
 
   return player;
 end
