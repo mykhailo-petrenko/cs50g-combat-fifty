@@ -29,7 +29,7 @@ with Image.open(infile).convert('RGBA') as img:
   for y in range(0, rows):
     for x in range(0, cols):
       coords = (x * cell_size + padding, y*cell_size + padding)
-      text = str(1 + x + y*cell_size)
+      text = str(1 + x + y*cols)
       canvas.text(
         coords, 
         text, 

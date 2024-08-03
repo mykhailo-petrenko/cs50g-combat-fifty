@@ -46,19 +46,19 @@ ENTITY_DEFS = {
       },
       ['death'] = {
         frames = {49, 50, 51},
-        interval = 0.15,
+        interval = 0.33,
         looping = false,
         texture = 'characters'
       },
       ['fade-out'] = {
-        frames = {49, 50, 51},
-        interval = 0.15,
+        frames = {1, 2, 4},
+        interval = 0.33,
         looping = false,
         texture = 'characters'
       },
       ['fade-in'] = {
-        frames = {49, 50, 51},
-        interval = 0.15,
+        frames = {4, 2, 1},
+        interval = 0.33,
         looping = false,
         texture = 'characters'
       }
