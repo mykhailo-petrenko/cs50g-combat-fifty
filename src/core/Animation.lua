@@ -14,7 +14,7 @@ function Animation:init(def)
     self.frames = def.frames
     self.interval = def.interval
     self.texture = def.texture
-    self.looping = def.looping or true
+    self.looping = def.looping or false
     self.mirrorX = def.mirrorX or false
 
     self.timer = 0
@@ -48,6 +48,7 @@ function Animation:update(dt)
             -- if we've looped back to the beginning, record
             if self.currentFrame == 1 then
                 self.timesPlayed = self.timesPlayed + 1
+                self.currentFrame = #self.frames
             end
         end
     end

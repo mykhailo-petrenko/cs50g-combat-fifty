@@ -56,6 +56,7 @@ end
 
 function Entity:changeAnimation(name)
   self.currentAnimation = self.animations[name]
+  self.currentAnimation:refresh()
 end
 
 function Entity:setAnimations(animations)

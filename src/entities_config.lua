@@ -9,39 +9,47 @@ ENTITY_DEFS = {
       ['walk-left'] = {
         frames = {17, 18, 19},
         interval = 0.15,
+        looping = true,
         texture = 'characters',
         mirrorX = true,
       },
       ['walk-right'] = {
         frames = {17, 18, 19},
         interval = 0.15,
+        looping = true,
         texture = 'characters'
       },
       ['walk-down'] = {
         frames = {1, 2, 3},
         interval = 0.15,
+        looping = true,
         texture = 'characters'
       },
       ['walk-up'] = {
         frames = {33, 34, 35},
         interval = 0.15,
+        looping = true,
         texture = 'characters'
       },
       ['idle-left'] = {
         frames = {17},
+        looping = true,
         texture = 'characters',
         mirrorX = true,
       },
       ['idle-right'] = {
         frames = {17},
+        looping = true,
         texture = 'characters'
       },
       ['idle-down'] = {
         frames = {1},
+        looping = true,
         texture = 'characters'
       },
       ['idle-up'] = {
         frames = {33},
+        looping = true,
         texture = 'characters'
       },
       ['death'] = {

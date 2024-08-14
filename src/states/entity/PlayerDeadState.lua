@@ -13,7 +13,7 @@ function PlayerDeadState:enter()
   
   player.alive = false
 
-  Timer.after(0.3, function()
+  Timer.after(1.5, function()
     self.entity:changeState('respawn')
   end);
 end
