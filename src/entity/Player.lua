@@ -55,15 +55,15 @@ function Player:update(dt)
 end
 
 
-function Player:draw() 
-  -- love.graphics.setColor(self.color[1], self.color[2], self.color[3])
-  -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
-  self.stateMachine:draw()
+-- function Player:draw() 
+--   -- love.graphics.setColor(self.color[1], self.color[2], self.color[3])
+--   -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
+--   self.stateMachine:draw()
 
-  self:drawAnimation()
+--   self:drawAnimation()
 
-  -- love.graphics.setColor(1, 1, 1, 1)
-end
+--   -- love.graphics.setColor(1, 1, 1, 1)
+-- end
 
 function Player:filter(other)
   -- print(self.id);

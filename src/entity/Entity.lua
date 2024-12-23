@@ -16,6 +16,7 @@ function Entity:init(properties)
 
   self.direction = DIRECTION.DOWN
 
+  self.opacity = 1.
   self.animations = nil
   self.currentAnimation = nil
 
@@ -36,6 +37,7 @@ end
 function Entity:draw()
   self.stateMachine:draw()
   
+  self:drawAnimation()
   -- love.graphics.setColor(0, 1, 0)
   -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
   -- love.graphics.setColor(1, 1, 1, 1)
@@ -77,13 +79,31 @@ function Entity:updateAnimation(dt)
   self.currentAnimation:update(dt)
 end
 
+function Entity:fadeIn(duration)
+  Timer.tween(duration, {
+    [self] = {opacity = 1}
+  }):finish(function()
+
+  end)
+end
+
+function Entity:fadeOut(duration)
+  Timer.tween(duration, {
+    [self] = {opacity = 0}
+  }):finish(function()
+
+  end)
+end
+
 function Entity:drawAnimation()
   if not self.currentAnimation then
     return
   end
 
   local animation = self.currentAnimation
-  love.graphics.setColor(1, 1, 1, 1)
+  
+  love.graphics.setBlendMode("alpha")
+	love.graphics.setColor(1., 1., 1., self.opacity)
 
   local quad = globalQuads[animation.texture][animation:getCurrentFrame()]
   local x, y, qw, qh = quad:getViewport()

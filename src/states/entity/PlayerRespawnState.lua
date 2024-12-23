@@ -6,7 +6,8 @@ function PlayerRespawnState:init(entity, scene)
 
   self.respawn_delay = 1
 
-  self.entity:changeAnimation('fade-out')
+  -- self.entity:changeAnimation('fade-out')
+  self.entity:fadeOut(0.3)
   self.newX = 0
   self.newY = 0
 end
@@ -33,7 +34,7 @@ end
 function PlayerRespawnState:enter()
   Timer.after(self.respawn_delay - 0.2, function()
     self:randomTeleport()
-    self.entity:changeAnimation('fade-in')
+    self.entity:fadeIn(0.2)
   end);
 
   Timer.after(self.respawn_delay, function()
