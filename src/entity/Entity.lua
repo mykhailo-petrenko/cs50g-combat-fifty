@@ -55,6 +55,12 @@ function Entity:changeState(state)
 end
 
 function Entity:changeAnimation(name)
+  -- so not change animation to itself
+  -- just to prevent constant reseting of animation while walking
+  if self.currentAnimation and self.currentAnimation.name == name then
+    return
+  end
+
   self.currentAnimation = self.animations[name]
   self.currentAnimation:refresh()
 end

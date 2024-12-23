@@ -11,6 +11,7 @@
 Animation = Class{}
 
 function Animation:init(def)
+    self.name = def.name
     self.frames = def.frames
     self.interval = def.interval
     self.texture = def.texture
@@ -46,9 +47,8 @@ function Animation:update(dt)
             self.currentFrame = math.max(1, (self.currentFrame + 1) % (#self.frames + 1))
 
             -- if we've looped back to the beginning, record
-            if self.currentFrame == 1 then
+            if self.currentFrame == #self.frames then
                 self.timesPlayed = self.timesPlayed + 1
-                self.currentFrame = #self.frames
             end
         end
     end
@@ -71,6 +71,7 @@ function Animation.animationsFactory(animations, frameShift)
         end
 
         animationsReturned[k] = Animation({
+            name = k,
             texture = animationDef.texture,
             frames = frames,
             interval = animationDef.interval,
