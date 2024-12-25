@@ -11,6 +11,7 @@ function Player:init(properties)
 
   self.speed = 48
   self.isSensor = true
+  self.isHittable = true
 
   self.weapon = Weapon({
     x = self.x,

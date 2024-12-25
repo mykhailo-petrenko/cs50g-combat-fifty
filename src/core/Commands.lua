@@ -80,6 +80,10 @@ function FlyCommand:execute(scene)
     -- print(entity.type, entity.id, col.type, col.other.type, col.other.id)
     if target.isSensor then
       target:onBump(entity)
+
+      if entity.isSensor then
+        entity:onBump(target)
+      end
     end
   end
 end

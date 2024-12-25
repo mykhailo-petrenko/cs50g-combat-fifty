@@ -62,6 +62,10 @@ function Scene:add(entity)
 end
 
 function Scene:remove(entity)
+  if not self.world:hasItem(entity) then
+    return
+  end
+
   self.world:remove(entity)
 
   local index = -1

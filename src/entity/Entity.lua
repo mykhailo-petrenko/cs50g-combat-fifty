@@ -12,7 +12,10 @@ function Entity:init(properties)
   self.width = properties.width or 0
   self.height = properties.height or 0
   self.speed = properties.speed or 0
+  -- on Bump will be invoked during collision detection.
   self.isSensor = properties.isSensor or false
+  -- Could be hitted by bullet. Bullet can not go through the hittable object.
+  self.isHittable = properties.isHittable or false
 
   self.direction = DIRECTION.DOWN
 

@@ -4,11 +4,12 @@ function BulletFlyState:init(entity, scene)
     self.entity = entity
     self.scene = scene
 
+    self.life_time = 4
     -- self.entity:changeAnimation('idle-' .. self.entity.direction)
 end
 
 function BulletFlyState:enter()
-  Timer.after(5, function ()
+  Timer.after(self.life_time, function ()
     self.entity:changeState('destroy')
   end)
 end

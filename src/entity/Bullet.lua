@@ -11,6 +11,7 @@ function Bullet:init(properties)
   self.height = 8
 
   self.isSensor = true
+  self.isHittable = false
 
   self._r = math.sqrt(self.width*self.width/2)
 end
@@ -35,4 +36,15 @@ end
 
 function Bullet:filter(other)
   return 'cross'
+end
+
+function Bullet:onBump(opposite)
+  if not opposite.isHittable then
+    return
+  end
+
+  print('Bullet onBump', self.type, self.id, opposite.type, opposite.id)
+  
+  -- print_r(collisions);
+  self:changeState('destroy')
 end
