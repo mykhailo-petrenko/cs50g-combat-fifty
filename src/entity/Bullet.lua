@@ -5,7 +5,8 @@ function Bullet:init(properties)
   self.type = 'bullet'
 
   self.direection = properties.direction
-
+  self.shooter = properties.shooter
+  
   self.speed = 128
   self.width = 8
   self.height = 8
@@ -44,7 +45,7 @@ function Bullet:onBump(opposite)
   end
 
   print('Bullet onBump', self.type, self.id, opposite.type, opposite.id)
-  
+
   -- print_r(collisions);
   self:changeState('destroy')
 end

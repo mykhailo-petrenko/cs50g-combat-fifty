@@ -70,7 +70,7 @@ end
 function love.draw()
   push:start()
 
-  -- draw all entities in thee State Stack
+  -- draw all entities in the State Stack
   gameStateStack:draw()
 
   push:finish()

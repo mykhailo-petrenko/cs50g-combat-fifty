@@ -1,6 +1,8 @@
 Scene = Class{}
 
 function Scene:init(map_config)
+  self.is_debug = false
+
   self.world = Bump.newWorld(TILE_SIZE)
 
     -- Load a map exported to Lua from Tiled
@@ -34,22 +36,27 @@ end
 
 function Scene:draw()
   -- Draw the map and all objects
+  -- love.graphics.setFont(globalFonts['medium'])
   self.map:draw()
 
+  -- Draw entities
   for i = #self.entities, 1, -1 do
     local entity = self.entities[i]
 
     entity:draw()
   end
 
+  -- Draw players
   for i = #self.players, 1, -1 do
     local player = self.players[i]
     player:draw()
   end
 
-  -- deebug: draw bboxes (bump map)
-  love.graphics.setColor(0, 1, 0)
-  self.map:bump_draw()
+  if self.is_debug then
+    -- deebug: draw bboxes (bump map)
+    love.graphics.setColor(0, 1, 0)
+    self.map:bump_draw()
+  end
 end
 
 function Scene:enqueueCommand(command) 

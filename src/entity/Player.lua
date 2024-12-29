@@ -13,10 +13,7 @@ function Player:init(properties)
   self.isSensor = true
   self.isHittable = true
 
-  self.weapon = Weapon({
-    x = self.x,
-    y = self.y
-  })
+  self.weapon  = nil
 
   self.keys = {
     LEFT = properties.controls[1] or 'left',
@@ -26,6 +23,18 @@ function Player:init(properties)
     FIRE = properties.controls[5] or '.',
     NEXT_WEEAPON = properties.controls[6] or ',',
   }
+
+  local weapon = Weapon({
+    x = self.x,
+    y = self.y
+  })
+
+  self:pickUpAsset(weapon)
+end
+
+function Player:pickUpAsset(asset)
+  self.weapon = asset
+  asset:ownedBy(self)
 end
 
 function Player:update(dt)
@@ -80,6 +89,10 @@ function Player:onBump(opposite)
   print('onBump', self.type, self.id, opposite.type, opposite.id)
 
   if opposite.type == 'bullet' and self.alive then
+    local bullet = opposite
+
+    print(self.id .. ' killed by ' .. bullet.shooter.id)
+    
     self:changeState('dead')
   end
   -- print_r(collisions);

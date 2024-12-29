@@ -18,6 +18,7 @@ function Weapon:shoot(scene)
     x = x,
     y = y,
     direction = self.direction,
+    shooter = self.owner
   })
 
   -- local animations = Animation.animationsFactory(
