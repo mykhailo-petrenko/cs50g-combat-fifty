@@ -8,10 +8,14 @@ function PlayerDeadState:init(entity, scene)
 end
 
 -- function PlayerReloadState:init() end
-function PlayerDeadState:enter()
+function PlayerDeadState:enter(params)
   local player = self.entity
   
   player.alive = false
+
+  if params and params.killedBy then
+    self.scene.stats:incrementFrag(params.killedBy)
+  end
 
   Timer.after(0.5, function()
     self.entity:changeState('respawn')

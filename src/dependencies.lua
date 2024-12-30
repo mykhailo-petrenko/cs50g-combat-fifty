@@ -12,6 +12,7 @@ require 'src/constants'
 require 'src/entities_config'
 
 require 'src/core/Commands'
+require 'src/core/Stats'
 require 'src/core/Scene'
 require 'src/core/LevelConfigurator'
 

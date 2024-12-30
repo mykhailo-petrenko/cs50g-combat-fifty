@@ -9,6 +9,8 @@ function Scene:init(map_config)
 	self.map = STI(map_config, {"bump"})
   self.map:bump_init(self.world)
   
+  self.stats = Stats(self.map)
+
   self.entities = {}
   self.players = {}
   self.commands = {}
@@ -92,5 +94,7 @@ end
 function Scene:addPlayer(player)
   self.world:add(player, player.x, player.y, player.width, player.height)
   table.insert(self.players, player)
+
+  self.stats:updatePlayers(self.players)
 end
 

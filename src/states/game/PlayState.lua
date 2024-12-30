@@ -11,25 +11,17 @@ function PlayState:enter()
 
   self.scene = Scene("tiled-map/combat-fifty-intro.lua")
 
-  local player1 = playerFactory({
-    id='uno',
-    x = 10 * TILE_SIZE,
-    y = 13 * TILE_SIZE,
-    skinNumber = self.playersConfig[1].skinNumber or 1,
-    controls = {'a', 'w', 'd', 's', 'q', 'tab'}
-  }, self.scene)
+  for i = 1, #self.playersConfig, 1 do
+    local newPlayer = playerFactory({
+      id=self.playersConfig[i].id,
+      x = (2*i + 1) * TILE_SIZE,
+      y = 3 * TILE_SIZE,
+      skinNumber = self.playersConfig[i].skinNumber or 1,
+      controls = self.playersConfig[i].controls
+    }, self.scene)
 
-  self.scene:addPlayer(player1)
-
-  local player2 = playerFactory({
-    id='dos',
-    x = 30 * TILE_SIZE,
-    y = 14 * TILE_SIZE,
-    skinNumber = self.playersConfig[2].skinNumber or 4,
-    controls = {'left', 'up', 'right', 'down', '.', ','}
-  }, self.scene)
-  
-  self.scene:addPlayer(player2)
+    self.scene:addPlayer(newPlayer)
+  end
 end
 
 function PlayState:exit()

@@ -93,7 +93,9 @@ function Player:onBump(opposite)
 
     print(self.id .. ' killed by ' .. bullet.shooter.id)
     
-    self:changeState('dead')
+    self:changeState('dead', {
+      ['killedBy'] = bullet.shooter.id
+    })
   end
   -- print_r(collisions);
 end

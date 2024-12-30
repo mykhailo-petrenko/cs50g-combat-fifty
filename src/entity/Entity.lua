@@ -55,8 +55,8 @@ function Entity:onBump(opposite)
   -- print_r(collisions);
 end
 
-function Entity:changeState(state)
-  self.stateMachine:change(state, nil)
+function Entity:changeState(state, params)
+  self.stateMachine:change(state, params or nil)
 end
 
 function Entity:changeAnimation(name)
