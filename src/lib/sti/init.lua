@@ -1038,6 +1038,31 @@ function Map:drawObjectLayer(layer)
 		lg.polygon("line", vertex)
 	end
 
+
+	local function drawText(object)
+		-- print(object.shape)
+		lg.setFont(globalFonts['medium'])
+		
+		if object.color then
+			lg.setColor(
+				object.color[1] / 255.,
+				object.color[2] / 255.,
+				object.color[3] / 255.
+			)
+		else
+			lg.setColor(0., 0., 0., 1.)
+		end
+
+		-- .pixelsize
+		lg.printf(
+			object.text, 
+			object.x,
+			object.y,
+			object.width,
+			object.halign
+		)
+	end
+
 	for _, object in ipairs(layer.objects) do
 		if object.visible then
 			if object.shape == "rectangle" and not object.gid then
@@ -1048,6 +1073,8 @@ function Map:drawObjectLayer(layer)
 				drawShape(object.polygon, "polygon")
 			elseif object.shape == "polyline" then
 				drawShape(object.polyline, "polyline")
+			elseif object.shape == "text" then
+				drawText(object)
 			elseif object.shape == "point" then
 				lg.points(object.x, object.y)
 			end

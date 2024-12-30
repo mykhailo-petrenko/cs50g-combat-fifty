@@ -91,6 +91,12 @@ function graphics.getColor(...)
 	end
 end
 
+function graphics.setFont(...)
+	if graphics.isCreated then
+		return lg.setFont(...)
+	end
+end
+
 function graphics.setColor(...)
 	if graphics.isCreated then
 		return lg.setColor(...)
@@ -112,6 +118,13 @@ end
 function graphics.points(...)
 	if graphics.isCreated then
 		return lg.points(...)
+	end
+end
+
+-- lg.graphics.printf(text, x, y, max_with, halign)
+function graphics.printf(...)
+	if graphics.isCreated then
+		return lg.printf(...)
 	end
 end
 
