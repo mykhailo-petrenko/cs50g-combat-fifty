@@ -15,6 +15,7 @@ DIRECTION = {
 
 globalTextures = {
   ['characters'] = love.graphics.newImage('graphics/rpg_32x32.png'),
+  ['bullet'] = love.graphics.newImage('graphics/bullet_11x5.png'),
   -- ['characters'] = love.graphics.newImage('graphics/characters.png'),
 }
 

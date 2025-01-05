@@ -16,8 +16,8 @@ end
 
 function BulletFlyState:update(dt)
   local bullet = self.entity;
-  local dx = (bullet.direection[1] * bullet.speed * dt)
-  local dy = (bullet.direection[2] * bullet.speed * dt)
+  local dx = (bullet.direction[1] * bullet.speed * dt)
+  local dy = (bullet.direction[2] * bullet.speed * dt)
   local move = FlyCommand(bullet, dx, dy)
 
   self.scene:enqueueCommand(move)

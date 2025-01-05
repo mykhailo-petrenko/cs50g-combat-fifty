@@ -4,17 +4,19 @@ function Bullet:init(properties)
   Entity.init(self, properties)
   self.type = 'bullet'
 
-  self.direection = properties.direction
+  self.direction = properties.direction
   self.shooter = properties.shooter
-  
+  print_r(properties.direction);
   self.speed = 128
-  self.width = 8
-  self.height = 8
+  self.width = 11
+  self.height = 5
+  self.texture = 'bullet'
+
+  self._dw = self.width / 2;
+  self._dh = self.height / 2;
 
   self.isSensor = true
   self.isHittable = false
-
-  self._r = math.sqrt(self.width*self.width/2)
 end
 
 
@@ -23,16 +25,21 @@ function Bullet:update(dt)
 end
 
 
-function Bullet:draw() 
-  love.graphics.setColor(1, 0, 0, 0.5)
-  love.graphics.circle(
-    'fill', 
-    self.x + (self.width / 2), 
-    self.y + (self.height / 2), 
-    self._r
-  )
-
+function Bullet:draw()
   love.graphics.setColor(1, 1, 1, 1)
+  
+  local dx = self._dw
+  local dy = self._dh
+  local r = 0
+
+  if self.direction[2] ~= 0 then
+    r = math.pi / 2;
+  end
+
+  local x = self.x + dx;
+  local y = self.y + dy;
+
+  love.graphics.draw( globalTextures[self.texture], x, y, r)
 end
 
 function Bullet:filter(other)
